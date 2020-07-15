@@ -42,7 +42,7 @@ public class BatchStep1Config {
     public ItemWriter<Transaction> dbWriter() {
         return new JdbcBatchItemWriterBuilder<Transaction>()
                 .dataSource(dataSource)
-                .sql("INSERT INTO TRANSACTION VALUES (:userId, :userName, :transactionDate, :transactionAmount)")
+                .sql("INSERT INTO TRANSACTION VALUES (:userId, :transactionDate, :userName, :transactionAmount)")
                 .beanMapped()
                 .build();
     }

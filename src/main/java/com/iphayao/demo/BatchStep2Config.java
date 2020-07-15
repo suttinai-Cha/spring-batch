@@ -39,7 +39,7 @@ public class BatchStep2Config {
         return new JdbcCursorItemReaderBuilder<TransactionSummary>()
                 .dataSource(dataSource)
                 .name("db-reader")
-                .sql("select count(first_name) a,  sum(transaction_amount) b from TRANSACTION")
+                .sql("select count(userName) a,  sum(transactionAmount) b from TRANSACTION")
                 .rowMapper((rs, rowNum) -> TransactionSummary.builder()
                         .count(rs.getInt("a"))
                         .totalAmount(rs.getInt("b"))

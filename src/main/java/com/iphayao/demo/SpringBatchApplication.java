@@ -9,8 +9,8 @@ import java.io.File;
 public class SpringBatchApplication {
 
 	public static void main(String[] args) {
-		System.setProperty("input", "file://" + new File("/Users/Phayao/Data/transaction.csv").getAbsolutePath());
-		System.setProperty("output", "file://" + new File("/Users/Phayao/Data/summary.xml").getAbsolutePath());
+		System.setProperty("input", "file:" + new File("/Data/transaction.csv").getAbsolutePath());
+		System.setProperty("output", "file:" + new File("/Data/summary.xml").getAbsolutePath());
 		SpringApplication.run(SpringBatchApplication.class, args);
 	}
 
