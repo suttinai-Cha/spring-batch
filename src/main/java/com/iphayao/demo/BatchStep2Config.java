@@ -34,7 +34,7 @@ public class BatchStep2Config {
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
 
-    @Bean("step2ItemReader")
+    @Bean(name ="step2ItemReader", destroyMethod="")
     public ItemReader<TransactionSummary> dbReader() {
         return new JdbcCursorItemReaderBuilder<TransactionSummary>()
                 .dataSource(dataSource)
@@ -48,7 +48,7 @@ public class BatchStep2Config {
                 .build();
     }
 
-    @Bean("step2ItemWriter")
+    @Bean(name ="step2ItemWriter" , destroyMethod="")
     public ItemWriter<TransactionSummary> xmlWriter(Marshaller marshaller) {
         StaxEventItemWriter<TransactionSummary> itemWriter = new StaxEventItemWriter<>();
         itemWriter.setMarshaller(marshaller);
@@ -68,7 +68,7 @@ public class BatchStep2Config {
     @Bean
     public Step step2(ItemReader<TransactionSummary> step2ItemReader,
                       ItemWriter<TransactionSummary> step2ItemWriter) {
-        return stepBuilderFactory.get("Step1 - Import Transaction Data")
+        return stepBuilderFactory.get("Step2 - Import Transaction Data")
                 .<TransactionSummary, TransactionSummary>chunk(1000)
                 .reader(step2ItemReader)
                 .writer(step2ItemWriter)
