@@ -21,6 +21,7 @@ public class MarkdownSolrBatchScheduler {
     private Job indexMarkdownDocumentsJob;
     
     @Scheduled(cron = "0 * * * * *")
+    //Run every minute
     public void schedule() throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
     	 jobLauncher.run(indexMarkdownDocumentsJob, new JobParametersBuilder()
     		        .addDate("date", new Date())
