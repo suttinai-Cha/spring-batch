@@ -68,8 +68,8 @@ public class BatchStep2Config {
     @Bean
     public Step step2(ItemReader<TransactionSummary> step2ItemReader,
                       ItemWriter<TransactionSummary> step2ItemWriter) {
-        return stepBuilderFactory.get("Step2 - Import Transaction Data")
-                .<TransactionSummary, TransactionSummary>chunk(1000)
+        return stepBuilderFactory.get("Step2 - Export Transaction Data")
+                .<TransactionSummary, TransactionSummary>chunk(1)
                 .reader(step2ItemReader)
                 .writer(step2ItemWriter)
                 .build();

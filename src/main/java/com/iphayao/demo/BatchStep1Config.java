@@ -6,6 +6,7 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
+import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +29,7 @@ public class BatchStep1Config {
 
     @Bean("step1ItemReader")
     public ItemReader<Transaction> fileReader() {
-        return new FlatFileItemReaderBuilder<Transaction>()
+        FlatFileItemReader<Transaction> a = new FlatFileItemReaderBuilder<Transaction>()
                 .resource(inputFile)
                 .name("file-reader")
                 .targetType(Transaction.class)
@@ -36,6 +37,8 @@ public class BatchStep1Config {
                 .names(new String[]{"firstName", "userId", "transactionDate", "transactionAmount"})
                 .linesToSkip(1)
                 .build();
+        System.out.println("step1ItemReader");
+        return a;
     }
 
     @Bean("step1ItemWriter")
@@ -74,7 +77,7 @@ public class BatchStep1Config {
                       ItemProcessor<Transaction, Transaction> step1ItemProcessor,
                       ItemWriter<Transaction> step1ItemWriter) {
         return stepBuilderFactory.get("Step1 - Import Transaction Data")
-                .<Transaction, Transaction>chunk(1000)
+                .<Transaction, Transaction>chunk(1)
                 .reader(step1ItemReader)
                 .processor(step1ItemProcessor)
                 .writer(step1ItemWriter)
