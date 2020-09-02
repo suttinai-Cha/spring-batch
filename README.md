@@ -11,3 +11,5 @@ CREATE TABLE `TRANSACTION` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 ``
+## Run by specify job in eclipse 
+ Run --> Run configuration --> VM arguments: -Dspring.batch.job.names=JobName (see jobname in BatchJobConfig.java in annotation *@Bean("jobname")*)
